@@ -24,7 +24,7 @@ public class GameMessenger {
     private void sendGame(GameMessage gameObj) {
         MessageProperties props = new MessageProperties();
         props.setHeader("content_type", "application/json");
-        props.setHeader("game_id", gameObj.properties.id());
+        props.setHeader("game_id", gameObj.properties().id());
         try {
             String body = mapper.writeValueAsString(gameObj);
             Message message = new Message(body.getBytes(), props);
