@@ -27,4 +27,5 @@ public class ElasticSearchConfiguration {
 
         return new RestHighLevelClient(builder);
     }
+
 }

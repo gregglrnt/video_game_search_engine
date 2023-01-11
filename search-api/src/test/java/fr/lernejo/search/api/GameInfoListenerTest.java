@@ -13,7 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.MOCK)
 @AutoConfigureMockMvc
-public class GameInfoListenerIT {
+public class GameInfoListenerTest {
 
     @Mock
     private RestHighLevelClient client = new ElasticSearchConfiguration().restHighLevelClient("localhost", 9200, "elastic", "admin");
