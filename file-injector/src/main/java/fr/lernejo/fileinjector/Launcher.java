@@ -8,6 +8,7 @@ import org.springframework.context.support.AbstractApplicationContext;
 
 import java.io.File;
 import java.io.InputStream;
+import java.nio.file.Paths;
 
 @SpringBootApplication
 public class Launcher {
@@ -16,9 +17,9 @@ public class Launcher {
     public static void main(String[] args) {
         try (AbstractApplicationContext springContext = new AnnotationConfigApplicationContext(Launcher.class)) {
             if(args.length > 0) {
-                InputStream is = Launcher.class.getResourceAsStream(args[0]);
+                File f = Paths.get(args[0]).toFile();
                 ObjectMapper mapper = new ObjectMapper();
-                GameEntry[] games = mapper.readValue(is.readAllBytes(), GameEntry[].class);
+                GameEntry[] games = mapper.readValue(f, GameEntry[].class);
                 RabbitTemplate template = springContext.getBean(RabbitTemplate.class);
                 new GameMessenger(template).addGames(games);
             }

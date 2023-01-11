@@ -2,6 +2,7 @@ package fr.lernejo.fileinjector;
 
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
 import java.time.Duration;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -17,7 +18,9 @@ class LauncherTest {
 
     @Test
     void finds_my_file() {
-        Launcher.main(new String[]{"games.json"});
+        File file = new File("src/test/resources");
+        String jsonTestFile = file.getAbsolutePath()+"/games.json";
+        Launcher.main(new String[]{jsonTestFile});
         System.out.println("Found file and parsed it");
     }
 
