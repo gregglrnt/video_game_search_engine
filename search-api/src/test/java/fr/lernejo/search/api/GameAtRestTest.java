@@ -6,13 +6,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
-
-import java.io.ByteArrayOutputStream;
-
-import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 
@@ -23,7 +17,6 @@ public class GameAtRestTest {
     @Autowired
     private MockMvc mockMvc;
 
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     private String testQuery = "developer:\"Epic Games\"";
 
     @Test
