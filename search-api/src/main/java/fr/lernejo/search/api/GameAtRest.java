@@ -26,17 +26,16 @@ public class GameAtRest {
     }
 
     @GetMapping("api/games")
-    public List<Object> getGameWithLucene(@RequestParam(value = "query", required = false) String query) throws IOException {
+    public List<Object> getGameWithLucene(@RequestParam(name = "query") String query) throws IOException {
         List<Object> results = new ArrayList<>();
-            SearchRequest req = new SearchRequest();
-            SearchSourceBuilder source = new SearchSourceBuilder();
-            source.query(new QueryStringQueryBuilder(query));
-            req.source(source);
-            SearchResponse res = this.client.search(req, RequestOptions.DEFAULT);
-            for (SearchHit hit : res.getHits()) {
-                results.add(hit.getSourceAsMap());
-            }
-            return results;
+        SearchRequest req = new SearchRequest();
+        SearchSourceBuilder source = new SearchSourceBuilder();
+        source.query(new QueryStringQueryBuilder(query));
+        req.source(source);
+        for (SearchHit hit :  this.client.search(req, RequestOptions.DEFAULT).getHits()) {
+            results.add(hit.getSourceAsMap());
+        }
+        return results;
         }
     }
 

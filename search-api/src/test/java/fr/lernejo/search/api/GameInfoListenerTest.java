@@ -21,9 +21,7 @@ public class GameInfoListenerTest {
     @Mock
     private Message message;
 
-    @Captor
-    private ArgumentCaptor<IndexRequest> indexCaptor = ArgumentCaptor.forClass(IndexRequest.class);
-
+    private String test_me_body = "{\"id\":4,\"title\":\"CRSED:F.O.A.D.\",\"thumbnail\":\"https:\\/\\/www.freetogame.com\\/g\\/4\\/thumbnail.jpg\",\"short_description\":\"TakethebattleroyalegenreandaddmysticalpowersandyouhaveCRSED:F.O.A.D.(AkaCuisineRoyale:SecondEdition)\",\"game_url\":\"https:\\/\\/www.freetogame.com\\/open\\/crsed\",\"genre\":\"Shooter\",\"platform\":\"PC(Windows)\",\"publisher\":\"GaijinDistributionKFT\",\"developer\":\"DarkflowSoftware\",\"release_date\":\"2019-12-12\",\"freetogame_profile_url\":\"https:\\/\\/www.freetogame.com\\/crsed\"}";
    private GameInfoListener listener = new GameInfoListener(client);
 
     @Test
@@ -39,12 +37,8 @@ public class GameInfoListenerTest {
         MessageProperties props = new MessageProperties();
         props.setHeader("content_type", "application/json");
         props.setHeader("game_id", id);
-        this.message = new Message("body".getBytes(), props);
-        try {
-            listener.onMessage(this.message);
-        } catch (Exception e) {
-            throw new Exception("Error in indexation :" + e.getMessage());
-        }
+        this.message = new Message(test_me_body.getBytes(), props);
+        listener.onMessage(this.message);
     }
 
     @Test

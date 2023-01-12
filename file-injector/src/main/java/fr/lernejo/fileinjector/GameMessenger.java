@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
+import org.springframework.amqp.support.converter.Jackson2JsonMessageConverter;
 
 
 public class GameMessenger {
@@ -17,14 +18,14 @@ public class GameMessenger {
 
     public void addGames(GameEntry[] games) {
         for (GameEntry g : games) {
-            this.sendGame(new GameMessage(g));
+            this.sendGame(g);
         }
     }
 
-    private void sendGame(GameMessage gameObj) {
+    private void sendGame(GameEntry gameObj) {
+        rabbit.setMessageConverter(new Jackson2JsonMessageConverter());
         MessageProperties props = new MessageProperties();
-        props.setHeader("content_type", "application/json");
-        props.setHeader("game_id", gameObj.properties().id());
+        props.setHeader("game_id", gameObj.id());
         try {
             String body = mapper.writeValueAsString(gameObj);
             Message message = new Message(body.getBytes(), props);

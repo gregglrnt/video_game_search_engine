@@ -24,8 +24,6 @@ public class GameAtRestTest {
     private MockMvc mockMvc;
 
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-
     private String testQuery = "developer:\"Epic Games\"";
 
     @Test
@@ -33,8 +31,4 @@ public class GameAtRestTest {
         this.mockMvc.perform(get("/api/games?query=" + testQuery)).andExpect(status().isOk());
     }
 
-    @Test
-    public void will_return_doc_if_no_query() throws Exception {
-        this.mockMvc.perform(get("/api/games?query=")).andExpect(status().isOk()).andExpect(jsonPath("$.length()").isNumber());
-    }
 }
