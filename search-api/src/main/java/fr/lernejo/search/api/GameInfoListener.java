@@ -23,7 +23,6 @@ public class GameInfoListener {
     @RabbitListener(queues = "game_info")
     public void onMessage(Message message) throws IOException {
         if(message.getMessageProperties() == null) return;
-        System.out.println(new String(message.getBody()));
         String id = message.getMessageProperties().getHeaders().get("game_id").toString();
         IndexRequest index = new IndexRequest("games");
         index.id(id);
