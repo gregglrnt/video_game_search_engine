@@ -1,6 +1,5 @@
 package fr.lernejo.search.api;
 
-import org.elasticsearch.ElasticsearchException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;

@@ -7,7 +7,6 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 import org.springframework.context.support.AbstractApplicationContext;
 
 import java.io.File;
-import java.io.InputStream;
 import java.nio.file.Paths;
 
 @SpringBootApplication

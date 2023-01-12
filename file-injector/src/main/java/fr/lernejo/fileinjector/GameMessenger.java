@@ -1,5 +1,6 @@
 package fr.lernejo.fileinjector;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
@@ -16,23 +17,19 @@ public class GameMessenger {
         this.rabbit = originalTemplate;
     }
 
-    public void addGames(GameEntry[] games) {
+    public void addGames(GameEntry[] games) throws JsonProcessingException {
         for (GameEntry g : games) {
             this.sendGame(g);
         }
     }
 
-    private void sendGame(GameEntry gameObj) {
+    private void sendGame(GameEntry gameObj) throws JsonProcessingException {
         rabbit.setMessageConverter(new Jackson2JsonMessageConverter());
         MessageProperties props = new MessageProperties();
         props.setHeader("game_id", gameObj.id());
-        try {
-            String body = mapper.writeValueAsString(gameObj);
-            Message message = new Message(body.getBytes(), props);
-            rabbit.send(message);
-        } catch (Exception e) {
-            System.out.println("Failure to parse games :" + e.getMessage());
-        }
+        String body = mapper.writeValueAsString(gameObj);
+        Message message = new Message(body.getBytes(), props);
+        rabbit.send(message);
     }
 
 }

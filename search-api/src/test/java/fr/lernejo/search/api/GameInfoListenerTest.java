@@ -1,11 +1,8 @@
 package fr.lernejo.search.api;
 
 import org.elasticsearch.ElasticsearchException;
-import org.elasticsearch.action.index.IndexRequest;
 import org.elasticsearch.client.RestHighLevelClient;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Captor;
 import org.mockito.Mock;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageProperties;
