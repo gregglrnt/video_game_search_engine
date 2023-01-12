@@ -32,9 +32,7 @@ public class GameAtRest {
         SearchSourceBuilder source = new SearchSourceBuilder();
         source.query(new QueryStringQueryBuilder(query));
         req.source(source);
-        for (SearchHit hit :  this.client.search(req, RequestOptions.DEFAULT).getHits()) {
-            results.add(hit.getSourceAsMap());
-        }
+        this.client.search(req, RequestOptions.DEFAULT).getHits().forEach(hit -> { results.add(hit.getSourceAsMap());});
         return results;
         }
     }
